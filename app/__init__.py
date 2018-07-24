@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import  Api
-from app.entries.managentries import Entries
-from app.entries.singleEntry import SingleEntry
+from app.entries.views import Entries,SingleEntry
+
 app = Flask(__name__)
 app.secret_key = "aminah"
 

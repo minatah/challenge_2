@@ -688,7 +688,7 @@ def _compose_mro(cls, types):
 
     """
     bases = set(cls.__mro__)
-    # Remove entries which are already present in the __mro__ or unrelated.
+    # Remove Views which are already present in the __mro__ or unrelated.
     def is_related(typ):
         return (typ not in bases and hasattr(typ, '__mro__')
                                  and issubclass(cls, typ))
