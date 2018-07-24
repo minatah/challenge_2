@@ -5,23 +5,26 @@ from app.model.entrymodel import EntryModel
 
 entries_list = []
 
+
 class Entries(Resource):
     def post(self):
 
         parser = reqparse.RequestParser()
         """collecting args"""
+        parser.add_argument('id', type=int, required=True)
         parser.add_argument('title', type=str,required=True)
         parser.add_argument('content', type=str,required=True)
         parser.add_argument('date', type=str, required=True)
 
         """getting specific args"""
         args = parser.parse_args()
+        id = args['id']
         title = args['title']
         content=args['content']
         date=args['date']
 
         """creating an object"""
-        entryobject = EntryModel(title,content,date)
+        entryobject = EntryModel(id,title,content,date)
 
         """converting the object data to JSON format """
         convert_obj_data = json.loads(entryobject.myjson())
@@ -42,4 +45,9 @@ class Entries(Resource):
         return make_response(jsonify({
             'message':'Created an entry successfully.'
         }),201)
+
+
+    def get (self):
+        return {'entries': entries_list} ,200;
+
 

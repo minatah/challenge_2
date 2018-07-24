@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import  Api
 from app.entries.managentries import Entries
-
+from app.entries.singleEntry import SingleEntry
 app = Flask(__name__)
 app.secret_key = "aminah"
 
@@ -9,3 +9,4 @@ app.secret_key = "aminah"
 api = Api(app)
 
 api.add_resource(Entries,'/api/v1/entries')
+api.add_resource(SingleEntry,'/api/v1/entries/<entryId>')
