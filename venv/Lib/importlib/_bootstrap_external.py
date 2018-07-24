@@ -1137,7 +1137,7 @@ class PathFinder:
                 if portions is None:
                     raise ImportError('spec missing loader')
                 # This is possibly part of a namespace package.
-                #  Remember these path entries (if any) for when we
+                #  Remember these path Views (if any) for when we
                 #  create a namespace package, and continue iterating
                 #  on path.
                 namespace_path.extend(portions)
