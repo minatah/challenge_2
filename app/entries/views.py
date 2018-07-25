@@ -68,3 +68,42 @@ class SingleEntry(Resource):
         return make_response(jsonify({
             'message':'Sorry the entry does not exist'
         }),404)
+
+    def put (self, entryId):
+
+        parser = reqparse.RequestParser()
+        """collecting args"""
+        parser.add_argument('title', type=str, required=True)
+        parser.add_argument('content', type=str, required=True)
+        parser.add_argument('date', type=str, required=True)
+
+        """getting specific args"""
+        args = parser.parse_args()
+
+        title = args['title']
+        content = args['content']
+        date = args['date']
+
+        for entered_entry in entries_list:
+            if int(entryId) == int(entered_entry['id']):
+                """assign new entry"""
+                entered_entry['title']= title
+                entered_entry['content']= content
+                entered_entry['date'] = date
+
+                """enter updated entry in a dictionary """
+
+                final_data = {
+                    'id': entered_entry['id'],
+                    'title': entered_entry['title'],
+                    'content': entered_entry['content'],
+                    'date': entered_entry['date']
+                }
+
+                return make_response(jsonify({
+                    'message':'entry updated successfully',
+                    'entry': final_data
+                }), 200)
+            return make_response(jsonify({
+                'message': 'entry not found please'
+            }), 404)
